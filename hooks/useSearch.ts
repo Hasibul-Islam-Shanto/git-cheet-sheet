@@ -5,35 +5,42 @@ import { useSearchStore } from '@/store/useSearchStore'
 import { searchIndex } from '@/lib/searchIndex'
 
 export function useSearch() {
-  const store = useSearchStore()
+  const query = useSearchStore((s) => s.query)
+  const isOpen = useSearchStore((s) => s.isOpen)
+  const results = useSearchStore((s) => s.results)
+  const activeIndex = useSearchStore((s) => s.activeIndex)
+  const openSearch = useSearchStore((s) => s.openSearch)
+  const closeSearch = useSearchStore((s) => s.closeSearch)
+  const setActiveIndex = useSearchStore((s) => s.setActiveIndex)
+  const setQuery = useSearchStore((s) => s.setQuery)
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault()
-        store.isOpen ? store.closeSearch() : store.openSearch()
+        isOpen ? closeSearch() : openSearch()
       }
-      if (e.key === 'Escape' && store.isOpen) {
-        store.closeSearch()
+      if (e.key === 'Escape' && isOpen) {
+        closeSearch()
       }
     }
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [store.isOpen]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [isOpen, openSearch, closeSearch])
 
   const handleQueryChange = (q: string) => {
-    store.setQuery(q, searchIndex)
+    setQuery(q, searchIndex)
   }
 
   return {
-    query: store.query,
-    isOpen: store.isOpen,
-    results: store.results,
-    activeIndex: store.activeIndex,
-    openSearch: store.openSearch,
-    closeSearch: store.closeSearch,
-    setActiveIndex: store.setActiveIndex,
+    query,
+    isOpen,
+    results,
+    activeIndex,
+    openSearch,
+    closeSearch,
+    setActiveIndex,
     handleQueryChange,
   }
 }

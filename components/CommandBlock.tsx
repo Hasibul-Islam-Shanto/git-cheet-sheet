@@ -1,6 +1,11 @@
+'use client'
+
+import { useState } from 'react'
 import type { CommandExample } from '@/types'
 import CopyButton from '@/components/ui/CopyButton'
 import BookmarkButton from '@/components/ui/BookmarkButton'
+import { InfoButton } from '@/components/ui/InfoButton'
+import { CommandDescriptionModal } from '@/components/ui/CommandDescriptionModal'
 
 interface Props {
   command: CommandExample
@@ -11,6 +16,8 @@ interface Props {
 }
 
 export default function CommandBlock({ command, style, cardId, cardTitle, section }: Props) {
+  const [showDescription, setShowDescription] = useState(false)
+
   const rawText = command.tokens
     .map((line) => line.map((token) => token.text).join(''))
     .join('\n')
@@ -18,8 +25,11 @@ export default function CommandBlock({ command, style, cardId, cardTitle, sectio
   return (
     <div className="mb-[14px]" style={style}>
       <div className="flex items-center justify-between mb-[5px]">
-        <div className="text-[0.72rem] text-(--muted)">
+        <div className="flex items-center gap-2 text-[0.72rem] text-(--muted)">
           <strong className="text-(--text)">{command.label}</strong>
+          {command.description && (
+            <InfoButton onClick={() => setShowDescription(true)} />
+          )}
         </div>
         <BookmarkButton
           cardId={cardId}
@@ -44,6 +54,14 @@ export default function CommandBlock({ command, style, cardId, cardTitle, sectio
         </pre>
         <CopyButton text={rawText} />
       </div>
+
+      {showDescription && command.description && (
+        <CommandDescriptionModal
+          label={command.label}
+          description={command.description}
+          onClose={() => setShowDescription(false)}
+        />
+      )}
     </div>
   )
 }
