@@ -4,26 +4,22 @@ export const whatIsGit: WhatIsGitItem[] = [
   {
     icon: '🗂️',
     title: 'Version Control System',
-    description:
-      'Records every change to your code — who changed it, what changed, and when. Roll back to any previous state, compare versions side by side, or trace exactly when a bug was introduced.',
+    description: 'Tracks every change to your code — what, when, and who. Roll back anytime.',
   },
   {
     icon: '🌿',
     title: 'Branching & Merging',
-    description:
-      'Create isolated branches to build features or fix bugs without touching the main codebase. When ready, merge them back cleanly — or discard them if the idea does not pan out.',
+    description: 'Work on features in isolation. Merge when ready, discard if not.',
   },
   {
     icon: '👥',
     title: 'Collaboration',
-    description:
-      'Teams of any size can work on the same codebase simultaneously. Git tracks who changed what, helps resolve conflicting edits, and keeps everyone in sync without overwriting each other.',
+    description: 'Multiple people, one codebase. Git keeps changes in sync without conflicts.',
   },
   {
     icon: '☁️',
     title: 'GitHub = Cloud + Collaboration',
-    description:
-      'GitHub stores your Git repositories in the cloud and adds a web UI for code review. Pull Requests, Issues, and Actions make it the platform teams use to ship and maintain software together.',
+    description: 'Hosts your repos online and adds Pull Requests, Issues, and CI/CD.',
   },
 ]
 

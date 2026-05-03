@@ -1,6 +1,8 @@
+import SearchBar from "@/components/search/SearchBar";
+
 export default function Hero() {
   return (
-    <header className="w-full px-6 pt-10 pb-[44px] relative overflow-hidden">
+    <header className="w-full px-6 pt-10 pb-8 relative overflow-hidden">
       <div className="relative z-10 max-w-[560px] mx-auto text-center">
         <div className="inline-block bg-[rgba(247,201,72,0.10)] border border-[rgba(247,201,72,0.25)] text-(--accent) font-mono text-[0.62rem] tracking-[0.18em] px-[13px] py-[4px] rounded-full mb-4 uppercase">
           Developer Reference
@@ -21,7 +23,11 @@ export default function Hero() {
           $ every command · with examples · explained simply
         </p>
 
-        <div className="w-9 h-[2px] bg-(--accent) mx-auto mt-[18px] rounded-sm opacity-40" />
+        <div className="mt-6">
+          <SearchBar />
+        </div>
+
+        <div className="w-9 h-[2px] bg-(--accent) mx-auto mt-4 rounded-sm opacity-40" />
       </div>
     </header>
   );
