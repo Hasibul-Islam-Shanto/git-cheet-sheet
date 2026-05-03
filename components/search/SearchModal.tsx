@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import { useSearch } from '@/hooks/useSearch'
 import SearchResult from './SearchResult'
 
@@ -20,6 +20,11 @@ function scrollToCard(cardId: string) {
 export default function SearchModal({ onClose }: SearchModalProps) {
   const { query, results, activeIndex, handleQueryChange, setActiveIndex } = useSearch()
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const handleSelect = useCallback((cardId: string) => {
+    onClose()
+    setTimeout(() => scrollToCard(cardId), 100)
+  }, [onClose])
 
   useEffect(() => {
     inputRef.current?.focus()
@@ -42,12 +47,7 @@ export default function SearchModal({ onClose }: SearchModalProps) {
 
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [activeIndex, results]) // eslint-disable-line react-hooks/exhaustive-deps
-
-  const handleSelect = (cardId: string) => {
-    onClose()
-    setTimeout(() => scrollToCard(cardId), 100)
-  }
+  }, [activeIndex, results, handleSelect, setActiveIndex])
 
   return (
     <div
@@ -58,7 +58,6 @@ export default function SearchModal({ onClose }: SearchModalProps) {
         className="w-[90%] max-w-[560px]"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Input */}
         <div className="flex items-center gap-3 px-4 py-3 bg-[#13161f] border border-[#232840] rounded-xl focus-within:border-[rgba(247,201,72,0.5)] transition-colors">
           <svg
             width="16"
@@ -95,7 +94,6 @@ export default function SearchModal({ onClose }: SearchModalProps) {
           </kbd>
         </div>
 
-        {/* Results */}
         <div className="mt-2 bg-[#13161f] border border-[#232840] rounded-xl overflow-hidden max-h-[380px] overflow-y-auto">
           {query.length === 0 && (
             <div className="p-6 text-center text-[#7a8099] text-xs font-mono">

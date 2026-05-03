@@ -3,9 +3,17 @@ export interface CodeToken {
   type: 'kw' | 'flag' | 'str' | 'cmt' | 'branch' | 'remote' | 'tag' | 'plain'
 }
 
+export interface CommandDescription {
+  what: string
+  when: string
+  warning?: string
+  tip?: string
+}
+
 export interface CommandExample {
   label: string
   tokens: CodeToken[][]
+  description?: CommandDescription
 }
 
 export interface CommandCardDef {
