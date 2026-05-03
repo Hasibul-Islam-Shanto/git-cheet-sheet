@@ -37,3 +37,12 @@ export interface WhatIsGitItem {
   title: string
   description: string
 }
+
+export interface Bookmark {
+  cardId: string
+  cardTitle: string
+  section: string
+  commandLabel: string
+  rawText: string
+  savedAt: number
+}

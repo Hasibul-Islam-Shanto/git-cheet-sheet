@@ -3,11 +3,12 @@ import CommandBlock from './CommandBlock'
 
 interface Props {
   card: CommandCardDef
+  sectionLabel: string
 }
 
-export default function CommandCard({ card }: Props) {
+export default function CommandCard({ card, sectionLabel }: Props) {
   return (
-    <div className="card bg-(--card) border border-(--border) rounded-xl overflow-hidden transition-[border-color,transform] duration-200 min-w-0">
+    <div id={card.id} className="card bg-(--card) border border-(--border) rounded-xl overflow-hidden transition-[border-color,transform] duration-200 min-w-0">
       <div className="pt-[14px] px-[18px] pb-[10px] flex items-center gap-[10px] border-b border-(--border)">
         <div className={`ic-${card.iconVariant} w-7 h-7 rounded-[7px] flex items-center justify-center text-[0.9rem] shrink-0`}>
           {card.icon}
@@ -23,6 +24,9 @@ export default function CommandCard({ card }: Props) {
           <CommandBlock
             key={cmd.label}
             command={cmd}
+            cardId={card.id}
+            cardTitle={card.title}
+            section={sectionLabel}
             style={idx === card.commands.length - 1 ? { marginBottom: 0 } : undefined}
           />
         ))}

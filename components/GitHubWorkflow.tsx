@@ -27,6 +27,9 @@ export default function GitHubWorkflow({ steps }: Props) {
               </div>
               <CommandBlock
                 command={{ label: step.label, tokens: step.tokens }}
+                cardId="github-workflow"
+                cardTitle="GitHub Workflow"
+                section="Remote & GitHub"
                 style={{ margin: 0, flex: 1 }}
               />
             </div>
