@@ -1,18 +1,5 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Syne } from "next/font/google";
 import "./globals.css";
-
-const syne = Syne({
-  subsets: ["latin"],
-  weight: ["400", "700", "800"],
-  variable: "--font-syne",
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  variable: "--font-mono-var",
-});
 
 const siteUrl = "https://git-sheet.hi-shanto.me";
 
@@ -100,7 +87,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${syne.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en">
       <body>{children}</body>
     </html>
   );

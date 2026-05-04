@@ -1,112 +1,111 @@
 'use client'
-
 import { create } from 'zustand'
-import type { SimRepo, TerminalLine, ExplainerState, VisualizerScenario } from '@/types/visualizer'
-import { scenarios } from '@/data/visualizer/scenarios'
-
-const EMPTY_REPO: SimRepo = {
-  commits: [],
-  branches: [],
-  HEAD: 'main',
-  stash: [],
-  stage: [],
-  workingDir: [],
-}
-
-const EMPTY_EXPLAINER: ExplainerState = {
-  before: null,
-  after: null,
-  explanation: '',
-  command: '',
-}
-
-function makeWelcomeLines(): TerminalLine[] {
-  const lines: Array<{ type: TerminalLine['type']; content: string }> = [
-    { type: 'info', content: 'Welcome to the hi-git interactive simulator.' },
-    { type: 'info', content: '─'.repeat(48) },
-    { type: 'info', content: 'Available commands for this scenario:' },
-    { type: 'output', content: '  git branch <name>     — create a new branch' },
-    { type: 'output', content: '  git switch <name>     — switch to a branch' },
-    { type: 'output', content: '  git commit -m "msg"   — create a new commit' },
-    { type: 'output', content: '  git merge <name>      — merge a branch' },
-    { type: 'output', content: '  git reset --hard      — undo last commit' },
-    { type: 'output', content: '  git stash             — save changes temporarily' },
-    { type: 'info', content: '─'.repeat(48) },
-    { type: 'info', content: 'Type "git help" to see this list anytime.' },
-  ]
-  const now = Date.now()
-  return lines.map(({ type, content }) => ({ type, content, timestamp: now }))
-}
+import type { VisualizerScenario, ScenarioStep } from '@/types/visualizer'
 
 interface VisualizerStore {
-  scenarioId: string
   scenario: VisualizerScenario | null
-  loadScenario: (id: string) => void
+  currentStepIndex: number
+  completedSteps: number[]
+  isComplete: boolean
+  currentStep: ScenarioStep | null
+  totalSteps: number
+  isFirstStep: boolean
+  isLastStep: boolean
 
-  repo: SimRepo
-  updateRepo: (repo: SimRepo) => void
-  resetRepo: () => void
-
-  terminalLines: TerminalLine[]
-  addLine: (line: TerminalLine) => void
-  clearTerminal: () => void
-
-  explainer: ExplainerState
-  updateExplainer: (state: ExplainerState) => void
-
-  isAnimating: boolean
-  setAnimating: (val: boolean) => void
-
-  highlightCommits: string[]
-  setHighlightCommits: (hashes: string[]) => void
-
-  commandHistory: string[]
-  addToHistory: (cmd: string) => void
+  loadScenario: (scenario: VisualizerScenario) => void
+  clearScenario: () => void
+  goToStep: (index: number) => void
+  nextStep: () => void
+  prevStep: () => void
+  reset: () => void
 }
 
 export const useVisualizerStore = create<VisualizerStore>((set, get) => ({
-  scenarioId: '',
   scenario: null,
-  loadScenario: (id: string) => {
-    const found = scenarios.find((s) => s.id === id) ?? null
+  currentStepIndex: 0,
+  completedSteps: [],
+  isComplete: false,
+  currentStep: null,
+  totalSteps: 0,
+  isFirstStep: true,
+  isLastStep: false,
+
+  loadScenario: (scenario) => set({
+    scenario,
+    currentStepIndex: 0,
+    completedSteps: [],
+    isComplete: false,
+    currentStep: scenario.steps[0] ?? null,
+    totalSteps: scenario.steps.length,
+    isFirstStep: true,
+    isLastStep: scenario.steps.length === 1,
+  }),
+
+  clearScenario: () => set({
+    scenario: null,
+    currentStepIndex: 0,
+    completedSteps: [],
+    isComplete: false,
+    currentStep: null,
+    totalSteps: 0,
+    isFirstStep: true,
+    isLastStep: false,
+  }),
+
+  goToStep: (index) => {
+    const { scenario } = get()
+    if (!scenario) return
     set({
-      scenarioId: id,
-      scenario: found,
-      repo: found ? JSON.parse(JSON.stringify(found.initialRepo)) as SimRepo : EMPTY_REPO,
-      terminalLines: makeWelcomeLines(),
-      explainer: EMPTY_EXPLAINER,
-      highlightCommits: [],
+      currentStepIndex: index,
+      currentStep: scenario.steps[index],
+      isFirstStep: index === 0,
+      isLastStep: index === scenario.steps.length - 1,
     })
   },
 
-  repo: EMPTY_REPO,
-  updateRepo: (repo) => set({ repo }),
-  resetRepo: () => {
-    const { scenario } = get()
-    if (scenario) {
-      set({
-        repo: JSON.parse(JSON.stringify(scenario.initialRepo)) as SimRepo,
-        terminalLines: makeWelcomeLines(),
-        explainer: EMPTY_EXPLAINER,
-        highlightCommits: [],
-      })
+  nextStep: () => {
+    const { currentStepIndex, scenario, completedSteps } = get()
+    if (!scenario) return
+    const newCompleted = completedSteps.includes(currentStepIndex)
+      ? completedSteps
+      : [...completedSteps, currentStepIndex]
+    if (currentStepIndex >= scenario.steps.length - 1) {
+      set({ completedSteps: newCompleted, isComplete: true })
+      return
     }
+    const next = currentStepIndex + 1
+    set({
+      currentStepIndex: next,
+      currentStep: scenario.steps[next],
+      completedSteps: newCompleted,
+      isFirstStep: false,
+      isLastStep: next === scenario.steps.length - 1,
+    })
   },
 
-  terminalLines: makeWelcomeLines(),
-  addLine: (line) => set((s) => ({ terminalLines: [...s.terminalLines, line] })),
-  clearTerminal: () => set({ terminalLines: [] }),
+  prevStep: () => {
+    const { currentStepIndex, scenario } = get()
+    if (!scenario || currentStepIndex === 0) return
+    const prev = currentStepIndex - 1
+    set({
+      currentStepIndex: prev,
+      currentStep: scenario.steps[prev],
+      isFirstStep: prev === 0,
+      isLastStep: false,
+      isComplete: false,
+    })
+  },
 
-  explainer: EMPTY_EXPLAINER,
-  updateExplainer: (state) => set({ explainer: state }),
-
-  isAnimating: false,
-  setAnimating: (val) => set({ isAnimating: val }),
-
-  highlightCommits: [],
-  setHighlightCommits: (hashes) => set({ highlightCommits: hashes }),
-
-  commandHistory: [],
-  addToHistory: (cmd) =>
-    set((s) => ({ commandHistory: [...s.commandHistory.slice(-49), cmd] })),
+  reset: () => {
+    const { scenario } = get()
+    if (!scenario) return
+    set({
+      currentStepIndex: 0,
+      completedSteps: [],
+      isComplete: false,
+      currentStep: scenario.steps[0],
+      isFirstStep: true,
+      isLastStep: scenario.steps.length === 1,
+    })
+  },
 }))
