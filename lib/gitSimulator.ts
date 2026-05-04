@@ -1,5 +1,17 @@
 import type { SimRepo, SimCommit, SimBranch } from '@/types/visualizer'
-import { HELP_LINES } from '@/data/visualizer/terminalResponses'
+
+const HELP_LINES = [
+  'Available commands:',
+  '  git branch <name>     — create a new branch',
+  '  git switch <name>     — switch to a branch',
+  '  git commit -m "msg"   — create a new commit',
+  '  git merge <name>      — merge a branch',
+  '  git reset --hard      — undo last commit',
+  '  git stash             — save changes temporarily',
+  '  git stash pop         — restore stashed changes',
+  '  git log               — show commit history',
+  '  git status            — show working tree status',
+]
 
 const BRANCH_COLORS: Record<string, string> = {
   main: '#f7c948',
@@ -192,7 +204,6 @@ function cmdMerge(args: string[], repo: SimRepo): SimResult {
 
 function cmdReset(args: string[], repo: SimRepo): SimResult {
   const soft = args.includes('--soft')
-  const hard = args.includes('--hard') || (!soft && args.includes('HEAD~1'))
   const steps = args.find((a) => a.startsWith('HEAD~'))
   const count = steps ? parseInt(steps.split('~')[1] ?? '1') : 1
 
@@ -262,7 +273,6 @@ function cmdRebase(args: string[], repo: SimRepo): SimResult {
   }
 
   const currentBranch = getCurrentBranch(repo)
-  const currentBranchObj = repo.branches.find((b) => b.name === currentBranch)!
 
   const commitsOnCurrent = repo.commits.filter((c) => c.branch === currentBranch)
   if (commitsOnCurrent.length === 0) {

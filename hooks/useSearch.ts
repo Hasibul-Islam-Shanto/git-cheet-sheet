@@ -18,7 +18,11 @@ export function useSearch() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault()
-        isOpen ? closeSearch() : openSearch()
+        if (isOpen) {
+          closeSearch()
+        } else {
+          openSearch()
+        }
       }
       if (e.key === 'Escape' && isOpen) {
         closeSearch()

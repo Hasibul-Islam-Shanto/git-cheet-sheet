@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-syne), sans-serif;
-  --font-mono: var(--font-mono-var), monospace;
+  --font-sans: ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 :root {
@@ -17,6 +17,8 @@
   --text: #e8eaf0;
   --muted: #7a8099;
   --code-bg: #0a0c12;
+  --font-syne: ui-sans-serif, system-ui, sans-serif;
+  --font-mono-var: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 *::before,
@@ -192,4 +194,14 @@ pre {
   .what-is-git {
     grid-template-columns: 1fr !important;
   }
+}
+
+@keyframes commitPulse {
+  0%   { filter: drop-shadow(0 0 0px var(--pulse-color)); }
+  50%  { filter: drop-shadow(0 0 8px var(--pulse-color)); }
+  100% { filter: drop-shadow(0 0 3px var(--pulse-color)); }
+}
+
+.commit-highlight {
+  animation: commitPulse 2s ease-in-out infinite;
 }
