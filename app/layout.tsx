@@ -52,7 +52,7 @@ export const metadata: Metadata = {
       "Searchable Git cheat sheet with real examples. Every command explained simply for beginner and intermediate developers.",
     images: [
       {
-        url: "/opengraph-image",
+        url: "/hi-git.webp",
         width: 1200,
         height: 630,
         alt: "hi-git — Git Cheat Sheet",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     title: "hi-git — Git, made human.",
     description:
       "Searchable Git cheat sheet with real examples for beginner and intermediate developers.",
-    images: ["/opengraph-image"],
+    images: ["/hi-git.webp"],
   },
 
   robots: {
