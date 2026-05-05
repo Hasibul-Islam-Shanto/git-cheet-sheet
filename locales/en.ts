@@ -99,7 +99,14 @@ export const en = {
     stepOf: (current: number, total: number) => `Step ${current} of ${total}`,
   },
 
-  footer: 'Git & GitHub Cheat Sheet · All commands tested · Local only unless noted',
+  footer: {
+    tagline: 'Git & GitHub Cheat Sheet · All commands tested · Local only unless noted',
+    author: 'Hasibul Islam Shanto',
+    github: 'GitHub',
+    linkedin: 'LinkedIn',
+    githubAria: 'Visit Hasibul Islam Shanto on GitHub',
+    linkedinAria: 'Visit Hasibul Islam Shanto on LinkedIn',
+  },
 }
 
 export type TranslationKeys = typeof en

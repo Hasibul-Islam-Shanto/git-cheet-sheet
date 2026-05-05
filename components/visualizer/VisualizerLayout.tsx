@@ -68,8 +68,20 @@ export default function VisualizerLayout({ cmdId }: Props) {
             href="/"
             className="inline-flex items-center gap-2 text-(--muted) hover:text-(--accent) font-mono text-sm transition-colors duration-200"
           >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="shrink-0">
-              <path d="M9 2L4 7L9 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 14 14"
+              fill="none"
+              className="shrink-0"
+            >
+              <path
+                d="M9 2L4 7L9 12"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
             {t.visualizer.backToCheatSheet}
           </Link>
@@ -77,21 +89,39 @@ export default function VisualizerLayout({ cmdId }: Props) {
             onClick={reset}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg font-mono text-sm text-(--muted) border border-(--border) hover:text-(--text) hover:border-(--muted) transition-all duration-200"
           >
-            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" className="shrink-0">
-              <path d="M2 6.5C2 4.015 4.015 2 6.5 2c1.38 0 2.615.6 3.47 1.555M11 6.5C11 8.985 8.985 11 6.5 11c-1.38 0-2.615-.6-3.47-1.555" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
-              <path d="M9.5 1.5v3h-3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg
+              width="13"
+              height="13"
+              viewBox="0 0 13 13"
+              fill="none"
+              className="shrink-0"
+            >
+              <path
+                d="M2 6.5C2 4.015 4.015 2 6.5 2c1.38 0 2.615.6 3.47 1.555M11 6.5C11 8.985 8.985 11 6.5 11c-1.38 0-2.615-.6-3.47-1.555"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+              />
+              <path
+                d="M9.5 1.5v3h-3"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
             {t.visualizer.reset}
           </button>
         </div>
       </div>
 
-      <div style={{ borderBottom: "1px solid var(--border)" }} className="mb-7" />
-
       <div className="max-w-6xl mx-auto px-4 pb-16 flex flex-col gap-6">
         <div
           className="rounded-2xl px-6 py-5"
-          style={{ background: "var(--card)", border: "1px solid var(--border)" }}
+          style={{
+            background: "var(--card)",
+            border: "1px solid var(--border)",
+          }}
         >
           <div className="flex items-center gap-3 mb-3">
             <span
@@ -101,10 +131,35 @@ export default function VisualizerLayout({ cmdId }: Props) {
                 border: "1px solid rgba(247,201,72,0.25)",
               }}
             >
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" className="shrink-0 opacity-70">
-                <rect x="1" y="1" width="10" height="10" rx="2" stroke="currentColor" strokeWidth="1.4"/>
-                <path d="M3.5 4.5L5.5 6.5L3.5 8.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M6.5 8.5H8.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"/>
+              <svg
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+                fill="none"
+                className="shrink-0 opacity-70"
+              >
+                <rect
+                  x="1"
+                  y="1"
+                  width="10"
+                  height="10"
+                  rx="2"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                />
+                <path
+                  d="M3.5 4.5L5.5 6.5L3.5 8.5"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+                <path
+                  d="M6.5 8.5H8.5"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                />
               </svg>
               {scenario.command}
             </span>

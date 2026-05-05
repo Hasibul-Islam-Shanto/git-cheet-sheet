@@ -101,5 +101,12 @@ export const bn: TranslationKeys = {
     stepOf: (current: number, total: number) => `ধাপ ${current} / ${total}`,
   },
 
-  footer: 'গিট ও গিটহাব চিট শিট · সমস্ত কমান্ড পরীক্ষিত · উল্লেখ না থাকলে শুধুমাত্র লোকাল',
+  footer: {
+    tagline: 'গিট ও গিটহাব চিট শিট · সমস্ত কমান্ড পরীক্ষিত · উল্লেখ না থাকলে শুধুমাত্র লোকাল',
+    author: 'Hasibul Islam Shanto',
+    github: 'GitHub',
+    linkedin: 'LinkedIn',
+    githubAria: 'গিটহাবে হাসিবুল ইসলাম শান্তো',
+    linkedinAria: 'লিঙ্কডইনে হাসিবুল ইসলাম শান্তো',
+  },
 }
