@@ -1,4 +1,4 @@
-import { sections, quickRef, workflowSteps, whatIsGit } from "@/data/commands";
+import { sections, quickRef, workflowSteps } from "@/data/commands";
 import Hero from "@/components/Hero";
 import WhatIsGit from "@/components/WhatIsGit";
 import SectionTitle from "@/components/SectionTitle";
@@ -7,6 +7,7 @@ import GitHubWorkflow from "@/components/GitHubWorkflow";
 import QuickRefTable from "@/components/QuickRefTable";
 import Footer from "@/components/Footer";
 import BookmarksTrigger from "@/components/bookmarks/BookmarksTrigger";
+import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -36,11 +37,14 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <BookmarksTrigger />
+      <div className="fixed top-5 right-5 z-30 flex items-center gap-2">
+        <LanguageSwitcher />
+        <BookmarksTrigger />
+      </div>
       <Hero />
 
       <div className="max-w-7xl mx-auto px-4">
-        <WhatIsGit items={whatIsGit} />
+        <WhatIsGit />
 
         {sections.map((section) => {
           const sectionLabel = section.label.replace(/^\d+ — /, "");

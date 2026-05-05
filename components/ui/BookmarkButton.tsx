@@ -1,6 +1,7 @@
 'use client'
 
 import { useBookmarkStore } from '@/store/useBookmarkStore'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface BookmarkButtonProps {
   cardId: string
@@ -18,6 +19,7 @@ export default function BookmarkButton({
   rawText,
 }: BookmarkButtonProps) {
   const { addBookmark, removeBookmark, isBookmarked } = useBookmarkStore()
+  const { t } = useTranslation()
   const bookmarked = isBookmarked(cardId, commandLabel)
 
   const toggle = () => {
@@ -31,8 +33,8 @@ export default function BookmarkButton({
   return (
     <button
       onClick={toggle}
-      aria-label={bookmarked ? 'Remove bookmark' : 'Bookmark this command'}
-      title={bookmarked ? 'Remove bookmark' : 'Save command'}
+      aria-label={bookmarked ? t.ui.bookmarkRemove : t.ui.bookmarkAdd}
+      title={bookmarked ? t.ui.bookmarkRemove : t.ui.bookmarkAdd}
       className={`p-1 rounded transition-all duration-200 ${
         bookmarked
           ? 'text-[#f7c948]'

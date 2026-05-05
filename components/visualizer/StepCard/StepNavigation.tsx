@@ -25,13 +25,13 @@ export function StepNavigation({ onPrev, onNext, isFirst, isLast }: Props) {
               : 'text-[#e8eaf0] hover:bg-[#232840]'
           }`}
         >
-          ← Previous
+          {t.visualizer.previous}
         </button>
         <button
           onClick={onNext}
           className="flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-bold text-[#0d0f16] bg-[#f7c948] hover:bg-[#e6b93d] transition-all duration-200"
         >
-          {isLast ? 'Complete ✓' : 'Next Step →'}
+          {isLast ? t.visualizer.complete : t.visualizer.nextStep}
         </button>
       </div>
       <p className="text-center text-[10px] text-[#3d4460] mt-2 font-mono">

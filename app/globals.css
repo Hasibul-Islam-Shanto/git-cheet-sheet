@@ -205,3 +205,14 @@ pre {
 .commit-highlight {
   animation: commitPulse 2s ease-in-out infinite;
 }
+
+:lang(bn) {
+  font-family: var(--font-bangla), sans-serif;
+  line-height: 1.5;
+}
+
+:lang(bn) code,
+:lang(bn) pre,
+:lang(bn) .font-mono {
+  font-family: var(--font-mono), monospace;
+}

@@ -1,6 +1,7 @@
 'use client'
 
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface CopyButtonProps {
   text: string
@@ -8,11 +9,12 @@ interface CopyButtonProps {
 
 export default function CopyButton({ text }: CopyButtonProps) {
   const { copy, copied } = useCopyToClipboard()
+  const { t } = useTranslation()
 
   return (
     <button
       onClick={() => copy(text)}
-      aria-label={copied ? 'Copied!' : 'Copy'}
+      aria-label={copied ? t.ui.copied : t.ui.copy}
       className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-150 p-1.5 rounded-md bg-[rgba(0,0,0,0.4)] hover:bg-[rgba(255,255,255,0.08)]"
     >
       {copied ? (

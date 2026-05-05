@@ -1,17 +1,17 @@
-import type { WhatIsGitItem } from "@/types";
+'use client'
 
-interface Props {
-  items: WhatIsGitItem[];
-}
+import { useTranslation } from '@/hooks/useTranslation'
 
-export default function WhatIsGit({ items }: Props) {
+export default function WhatIsGit() {
+  const { t } = useTranslation()
+
   return (
     <div className="what-is-git w-full mb-[50px] bg-(--card) border border-(--border) border-l-4 border-l-(--accent) rounded-xl grid grid-cols-2 gap-6 p-7 md:p-8">
       <h2 className="col-span-2 text-[1.1rem] text-(--accent) font-mono tracking-[0.08em] mb-1">
-        {"//"} What is Git?
+        {t.whatIsGit.title}
       </h2>
 
-      {items.map((item) => (
+      {t.whatIsGit.items.map((item) => (
         <div key={item.title} className="flex gap-3 items-start">
           <div className="text-[1.3rem] mt-[2px]">{item.icon}</div>
           <div>
@@ -19,11 +19,11 @@ export default function WhatIsGit({ items }: Props) {
               {item.title}
             </strong>
             <span className="text-(--muted) text-[0.82rem]">
-              {item.description}
+              {item.desc}
             </span>
           </div>
         </div>
       ))}
     </div>
-  );
+  )
 }

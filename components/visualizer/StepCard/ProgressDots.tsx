@@ -1,5 +1,6 @@
 'use client'
 import { motion } from 'framer-motion'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface Props {
   total: number
@@ -8,6 +9,7 @@ interface Props {
 }
 
 export function ProgressDots({ total, current, completed }: Props) {
+  const { t } = useTranslation()
   return (
     <div className="flex items-center gap-2">
       {Array.from({ length: total }).map((_, i) => {
@@ -32,7 +34,7 @@ export function ProgressDots({ total, current, completed }: Props) {
         )
       })}
       <span className="text-xs text-[#7a8099] font-mono ml-1">
-        Step {current + 1} of {total}
+        {t.visualizer.stepOf(current + 1, total)}
       </span>
     </div>
   )

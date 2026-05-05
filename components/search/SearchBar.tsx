@@ -1,10 +1,12 @@
 'use client'
 
 import { useSearch } from '@/hooks/useSearch'
+import { useTranslation } from '@/hooks/useTranslation'
 import SearchModal from './SearchModal'
 
 export default function SearchBar() {
   const { isOpen, openSearch, closeSearch } = useSearch()
+  const { t } = useTranslation()
 
   return (
     <>
@@ -27,9 +29,9 @@ export default function SearchBar() {
           <circle cx="11" cy="11" r="8" />
           <path d="m21 21-4.35-4.35" />
         </svg>
-        <span className="flex-1 text-[#7a8099] text-sm font-mono">Search commands...</span>
+        <span className="flex-1 text-[#7a8099] text-sm font-mono">{t.ui.search}</span>
         <kbd className="hidden sm:inline-flex items-center gap-1 text-[10px] text-[#7a8099] font-mono bg-[#0d0f16] border border-[#232840] px-1.5 py-0.5 rounded">
-          ⌘K
+          {t.ui.searchShortcut}
         </kbd>
       </button>
 

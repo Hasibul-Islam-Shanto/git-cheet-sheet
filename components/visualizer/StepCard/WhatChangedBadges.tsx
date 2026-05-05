@@ -18,11 +18,11 @@ const BADGE_STYLES: Record<ChangeType, { bg: string; color: string; icon: string
 }
 
 export function WhatChangedBadges({ items }: { items: WhatChanged[] }) {
-  const { locale } = useTranslation()
+  const { locale, t } = useTranslation()
   return (
     <div>
       <p className="text-xs font-mono font-semibold text-[#7a8099] tracking-widest uppercase mb-2.5">
-        🔄 What changed?
+        {t.visualizer.whatChanged}
       </p>
       <div className="flex flex-wrap gap-2">
         {items.map((item, i) => {
