@@ -13,7 +13,7 @@ const CARD_TO_VISUALIZER: Record<string, string> = {
   "undo-changes": "reset",
   stash: "stash",
   "cherry-pick": "cherry-pick",
-  "interactive-rebase": "rebase",
+  "interactive-rebase": "squash",
 };
 
 export default function CommandCard({ card, sectionLabel }: Props) {
