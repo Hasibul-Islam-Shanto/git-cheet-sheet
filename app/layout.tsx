@@ -5,10 +5,10 @@ import { HtmlLangSync } from "@/components/ui/HtmlLangSync";
 import { ThemeSync } from "@/components/ui/ThemeSync";
 
 const hindSiliguri = Hind_Siliguri({
-  subsets: ['bengali'],
-  weight: ['400', '600', '700'],
-  variable: '--font-bangla',
-})
+  subsets: ["bengali"],
+  weight: ["400", "600", "700"],
+  variable: "--font-bangla",
+});
 
 const siteUrl = "https://git-sheet.hi-shanto.me";
 
