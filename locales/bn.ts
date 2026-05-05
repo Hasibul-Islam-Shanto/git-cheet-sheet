@@ -56,6 +56,7 @@ export const bn: TranslationKeys = {
 
   modal: {
     command: 'কমান্ড',
+    closeAria: 'বন্ধ করুন',
     whatItDoes: 'এটি কী করে',
     whenToUse: 'কখন ব্যবহার করবেন',
     watchOut: '⚠️ সাবধান',
@@ -63,11 +64,13 @@ export const bn: TranslationKeys = {
   },
 
   search: {
+    dialogTitle: 'কমান্ড খুঁজুন',
     placeholder: 'কমান্ড খুঁজুন...',
     hint: 'কমান্ডের নাম, ফ্ল্যাগ বা কীওয়ার্ড টাইপ করুন...',
     keepTyping: 'আরও টাইপ করুন...',
     noResults: 'কোনো কমান্ড পাওয়া যায়নি',
     noResultsHint: '"reset", "branch", "stash" দিয়ে খোঁজার চেষ্টা করুন...',
+    clearQuery: 'সার্চ মুছুন',
   },
 
   bookmarks: {
@@ -75,6 +78,8 @@ export const bn: TranslationKeys = {
     empty: 'কোনো বুকমার্ক নেই',
     emptyDesc: 'যেকোনো কমান্ডের পাশের বুকমার্ক আইকনে ক্লিক করে সেভ করুন।',
     clearAll: 'সব বুকমার্ক মুছুন',
+    closePanel: 'সংরক্ষিত কমান্ড বন্ধ করুন',
+    removeItem: 'সংরক্ষিত থেকে সরান',
   },
 
   visualizer: {

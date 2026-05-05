@@ -4,7 +4,7 @@ interface SearchResultProps {
   item: SearchItem
   isActive: boolean
   query: string
-  onClick: () => void
+  onPick: () => void
   onMouseEnter: () => void
 }
 
@@ -27,14 +27,15 @@ export default function SearchResult({
   item,
   isActive,
   query,
-  onClick,
+  onPick,
   onMouseEnter,
 }: SearchResultProps) {
   return (
-    <div
-      onClick={onClick}
+    <button
+      type="button"
+      onClick={onPick}
       onMouseEnter={onMouseEnter}
-      className={`px-4 py-3 cursor-pointer border-l-2 transition-colors duration-100 ${
+      className={`w-full text-left px-4 py-3 cursor-pointer border-l-2 transition-colors duration-100 ${
         isActive
           ? 'bg-[rgba(247,201,72,0.08)] border-l-(--accent)'
           : 'border-l-transparent hover:bg-[rgba(247,201,72,0.05)]'
@@ -49,6 +50,6 @@ export default function SearchResult({
       <div className="text-[0.75rem] text-(--muted) font-mono mt-0.5 truncate">
         {highlightMatch(item.rawText.split('\n')[0], query)}
       </div>
-    </div>
+    </button>
   )
 }

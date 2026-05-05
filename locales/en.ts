@@ -54,6 +54,7 @@ export const en = {
 
   modal: {
     command: 'Command',
+    closeAria: 'Close',
     whatItDoes: 'What it does',
     whenToUse: 'When to use',
     watchOut: '⚠️ Watch out',
@@ -61,11 +62,13 @@ export const en = {
   },
 
   search: {
+    dialogTitle: 'Search commands',
     placeholder: 'Search commands...',
     hint: 'Type a command name, flag, or keyword...',
     keepTyping: 'Keep typing...',
     noResults: 'No commands found',
     noResultsHint: 'Try searching for "reset", "branch", "stash"...',
+    clearQuery: 'Clear search',
   },
 
   bookmarks: {
@@ -73,6 +76,8 @@ export const en = {
     empty: 'No bookmarks yet',
     emptyDesc: 'Click the bookmark icon next to any command to save it here.',
     clearAll: 'Clear all bookmarks',
+    closePanel: 'Close saved commands',
+    removeItem: 'Remove from saved commands',
   },
 
   visualizer: {

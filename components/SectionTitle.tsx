@@ -23,8 +23,8 @@ export default function SectionTitle({ label }: Props) {
   const translatedLabel = num && labelToKey[num] ? t.sections[labelToKey[num]] : label
 
   return (
-    <div className="section-title text-[0.7rem] font-mono tracking-[0.2em] uppercase text-(--accent) mt-12 mb-5 flex items-center gap-3">
+    <h2 className="section-title text-[0.7rem] font-mono tracking-[0.2em] uppercase text-(--accent) mt-12 mb-5 flex items-center gap-3">
       {translatedLabel}
-    </div>
+    </h2>
   )
 }
