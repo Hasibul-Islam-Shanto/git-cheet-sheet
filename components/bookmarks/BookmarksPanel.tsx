@@ -23,18 +23,18 @@ export default function BookmarksPanel({ onClose }: BookmarksPanelProps) {
     <>
       <div className="fixed inset-0 bg-black/50 z-40" onClick={onClose} />
 
-      <div className="fixed top-0 right-0 h-full w-[380px] max-w-full bg-[#13161f] border-l border-[#232840] z-50 flex flex-col animate-slide-in-right">
-        <div className="flex items-center justify-between p-5 border-b border-[#232840]">
+      <div className="fixed top-0 right-0 h-full w-[380px] max-w-full bg-(--card) border-l border-(--border) z-50 flex flex-col animate-slide-in-right">
+        <div className="flex items-center justify-between p-5 border-b border-(--border)">
           <div>
-            <h2 className="font-bold text-sm text-[#e8eaf0]">{t.bookmarks.header}</h2>
-            <p className="text-xs text-[#7a8099] mt-0.5">
+            <h2 className="font-bold text-sm text-(--text)">{t.bookmarks.header}</h2>
+            <p className="text-xs text-(--muted) mt-0.5">
               {bookmarks.length} bookmark{bookmarks.length !== 1 ? 's' : ''}
             </p>
           </div>
           <button
             onClick={onClose}
             aria-label="Close bookmarks"
-            className="text-[#7a8099] hover:text-[#e8eaf0] transition-colors text-lg leading-none p-1"
+            className="text-(--muted) hover:text-(--text) transition-colors text-lg leading-none p-1"
           >
             {t.ui.close}
           </button>
@@ -46,27 +46,27 @@ export default function BookmarksPanel({ onClose }: BookmarksPanelProps) {
           ) : (
             Object.entries(grouped).map(([sectionName, items]) => (
               <div key={sectionName} className="mb-5">
-                <div className="text-[0.62rem] text-[#f7c948] font-mono tracking-[0.15em] uppercase mb-2">
+                <div className="text-[0.62rem] text-(--accent) font-mono tracking-[0.15em] uppercase mb-2">
                   {sectionName}
                 </div>
                 <div className="flex flex-col gap-1">
                   {items.map((bookmark) => (
                     <div
                       key={`${bookmark.cardId}-${bookmark.commandLabel}`}
-                      className="flex items-start justify-between gap-2 p-2.5 rounded-lg bg-[#0d0f16] border border-[#232840] group/item"
+                      className="flex items-start justify-between gap-2 p-2.5 rounded-lg bg-(--bg) border border-(--border) group/item"
                     >
                       <div className="min-w-0 flex-1">
-                        <p className="text-[0.75rem] font-semibold text-[#e8eaf0] truncate">
+                        <p className="text-[0.75rem] font-semibold text-(--text) truncate">
                           {bookmark.commandLabel}
                         </p>
-                        <p className="text-[0.68rem] text-[#7a8099] font-mono mt-0.5 truncate">
+                        <p className="text-[0.68rem] text-(--muted) font-mono mt-0.5 truncate">
                           {bookmark.rawText.split('\n')[0]}
                         </p>
                       </div>
                       <button
                         onClick={() => removeBookmark(bookmark.cardId, bookmark.commandLabel)}
                         aria-label="Remove bookmark"
-                        className="shrink-0 text-[#3d4460] hover:text-[#ff6b6b] transition-colors opacity-0 group-hover/item:opacity-100 text-sm leading-none p-0.5"
+                        className="shrink-0 text-(--border) hover:text-(--accent3) transition-colors opacity-0 group-hover/item:opacity-100 text-sm leading-none p-0.5"
                       >
                         ✕
                       </button>
@@ -79,10 +79,10 @@ export default function BookmarksPanel({ onClose }: BookmarksPanelProps) {
         </div>
 
         {bookmarks.length > 0 && (
-          <div className="p-4 border-t border-[#232840]">
+          <div className="p-4 border-t border-(--border)">
             <button
               onClick={clearAll}
-              className="text-xs text-[#7a8099] hover:text-[#ff6b6b] transition-colors"
+              className="text-xs text-(--muted) hover:text-(--accent3) transition-colors"
             >
               {t.bookmarks.clearAll}
             </button>

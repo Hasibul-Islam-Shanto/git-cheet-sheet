@@ -5,7 +5,8 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-:root {
+:root,
+[data-theme="dark"] {
   --bg: #0d0f16;
   --card: #13161f;
   --card2: #181c28;
@@ -17,8 +18,25 @@
   --text: #e8eaf0;
   --muted: #7a8099;
   --code-bg: #0a0c12;
+  --shadow: rgba(0, 0, 0, 0.4);
   --font-syne: ui-sans-serif, system-ui, sans-serif;
-  --font-mono-var: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-mono-var:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+[data-theme="light"] {
+  --bg: #f5f6fa;
+  --card: #ffffff;
+  --card2: #f0f1f7;
+  --border: #e0e2ef;
+  --accent: #d4a017;
+  --accent2: #0d9e6e;
+  --accent3: #d63f3f;
+  --accent4: #2d6fd4;
+  --text: #1a1d2e;
+  --muted: #6b7080;
+  --code-bg: #f0f1f7;
+  --shadow: rgba(0, 0, 0, 0.08);
 }
 
 *::before,
@@ -26,6 +44,21 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.15s ease;
+}
+
+button,
+a,
+input {
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.1s ease,
+    opacity 0.15s ease,
+    transform 0.15s ease;
 }
 
 html {
@@ -78,7 +111,7 @@ header::before {
 
 pre {
   background: var(--code-bg);
-  border: 1px solid #1e2233;
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 10px 14px;
   font-family: var(--font-mono-var), monospace;
@@ -163,8 +196,14 @@ pre {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-8px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-in {
@@ -172,8 +211,12 @@ pre {
 }
 
 @keyframes highlightPulse {
-  0%   { box-shadow: 0 0 0 2px rgba(247, 201, 72, 0.6); }
-  100% { box-shadow: 0 0 0 2px rgba(247, 201, 72, 0); }
+  0% {
+    box-shadow: 0 0 0 2px rgba(247, 201, 72, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 2px rgba(247, 201, 72, 0);
+  }
 }
 
 .search-highlight {
@@ -181,8 +224,12 @@ pre {
 }
 
 @keyframes slideInRight {
-  from { transform: translateX(100%); }
-  to   { transform: translateX(0); }
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 .animate-slide-in-right {
@@ -197,9 +244,15 @@ pre {
 }
 
 @keyframes commitPulse {
-  0%   { filter: drop-shadow(0 0 0px var(--pulse-color)); }
-  50%  { filter: drop-shadow(0 0 8px var(--pulse-color)); }
-  100% { filter: drop-shadow(0 0 3px var(--pulse-color)); }
+  0% {
+    filter: drop-shadow(0 0 0px var(--pulse-color));
+  }
+  50% {
+    filter: drop-shadow(0 0 8px var(--pulse-color));
+  }
+  100% {
+    filter: drop-shadow(0 0 3px var(--pulse-color));
+  }
 }
 
 .commit-highlight {
@@ -215,4 +268,40 @@ pre {
 :lang(bn) pre,
 :lang(bn) .font-mono {
   font-family: var(--font-mono), monospace;
+}
+
+/* Code blocks in light mode — keep them distinct */
+[data-theme="light"] pre,
+[data-theme="light"] code {
+  background: var(--code-bg);
+  border-color: var(--border);
+}
+
+[data-theme="light"] .token-kw {
+  color: #b8860b;
+}
+[data-theme="light"] .token-str {
+  color: #c04a00;
+}
+[data-theme="light"] .token-cmt {
+  color: #8a91a8;
+}
+[data-theme="light"] .token-plain {
+  color: var(--text);
+}
+
+/* Cards need a subtle shadow in light mode */
+[data-theme="light"] .card,
+[data-theme="light"] [style*="var(--card)"] {
+  box-shadow: 0 1px 3px var(--shadow);
+}
+
+/* Search modal backdrop */
+[data-theme="light"] .search-backdrop {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Scrollbar in light mode */
+[data-theme="light"] {
+  scrollbar-color: var(--border) var(--bg);
 }

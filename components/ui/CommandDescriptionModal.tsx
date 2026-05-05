@@ -33,15 +33,15 @@ export function CommandDescriptionModal({ label, description, onClose }: Props) 
     >
       <div
         className="w-[90%] max-w-[480px] rounded-2xl border p-7"
-        style={{ background: '#13161f', borderColor: '#232840' }}
+        style={{ background: 'var(--card)', borderColor: 'var(--border)' }}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between mb-5">
           <div>
-            <p className="text-[10px] font-mono text-[#7a8099] uppercase tracking-widest mb-1">
+            <p className="text-[10px] font-mono text-(--muted) uppercase tracking-widest mb-1">
               {t.modal.command}
             </p>
-            <h2 className="text-[0.95rem] font-bold text-[#e8eaf0]">{label}</h2>
+            <h2 className="text-[0.95rem] font-bold text-(--text)">{label}</h2>
           </div>
           <button
             onClick={onClose}
@@ -53,17 +53,17 @@ export function CommandDescriptionModal({ label, description, onClose }: Props) 
         </div>
 
         <div className="mb-4">
-          <p className="text-[10px] font-mono text-[#f7c948] uppercase tracking-widest mb-2">
+          <p className="text-[10px] font-mono text-(--accent) uppercase tracking-widest mb-2">
             {t.modal.whatItDoes}
           </p>
-          <p className="text-[0.83rem] text-[#e8eaf0] leading-relaxed">{what}</p>
+          <p className="text-[0.83rem] text-(--text) leading-relaxed">{what}</p>
         </div>
 
         <div className="mb-4">
-          <p className="text-[10px] font-mono text-[#4fffb0] uppercase tracking-widest mb-2">
+          <p className="text-[10px] font-mono text-(--accent2) uppercase tracking-widest mb-2">
             {t.modal.whenToUse}
           </p>
-          <p className="text-[0.83rem] text-[#7a8099] leading-relaxed">{when}</p>
+          <p className="text-[0.83rem] text-(--muted) leading-relaxed">{when}</p>
         </div>
 
         {warning && (
@@ -74,10 +74,10 @@ export function CommandDescriptionModal({ label, description, onClose }: Props) 
               border: '1px solid rgba(255,107,107,0.2)',
             }}
           >
-            <p className="text-[10px] font-mono text-[#ff6b6b] uppercase tracking-widest mb-1">
+            <p className="text-[10px] font-mono text-(--accent3) uppercase tracking-widest mb-1">
               {t.modal.watchOut}
             </p>
-            <p className="text-[0.8rem] text-[#ff6b6b] leading-relaxed opacity-90">
+            <p className="text-[0.8rem] text-(--accent3) leading-relaxed opacity-90">
               {warning}
             </p>
           </div>
@@ -91,10 +91,10 @@ export function CommandDescriptionModal({ label, description, onClose }: Props) 
               border: '1px solid rgba(79,255,176,0.15)',
             }}
           >
-            <p className="text-[10px] font-mono text-[#4fffb0] uppercase tracking-widest mb-1">
+            <p className="text-[10px] font-mono text-(--accent2) uppercase tracking-widest mb-1">
               {t.modal.proTip}
             </p>
-            <p className="text-[0.8rem] text-[#7a8099] leading-relaxed">{tip}</p>
+            <p className="text-[0.8rem] text-(--muted) leading-relaxed">{tip}</p>
           </div>
         )}
       </div>

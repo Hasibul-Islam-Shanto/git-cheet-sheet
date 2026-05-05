@@ -15,10 +15,10 @@ export function AnalogyCard({ icon, analogy, label }: Props) {
     >
       <span className="text-3xl shrink-0 mt-0.5">{icon}</span>
       <div>
-        <p className="text-xs font-mono font-bold text-[#f7c948] tracking-widest uppercase mb-1.5">
+        <p className="text-xs font-mono font-bold text-(--accent) tracking-widest uppercase mb-1.5">
           {label}
         </p>
-        <p className="text-[0.9rem] text-[#9ba3bd] leading-relaxed">{analogy}</p>
+        <p className="text-[0.9rem] text-(--muted) leading-relaxed">{analogy}</p>
       </div>
     </div>
   )

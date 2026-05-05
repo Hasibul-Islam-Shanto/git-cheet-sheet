@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
 import { HtmlLangSync } from "@/components/ui/HtmlLangSync";
+import { ThemeSync } from "@/components/ui/ThemeSync";
 
 const hindSiliguri = Hind_Siliguri({
   subsets: ['bengali'],
@@ -96,7 +97,34 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={hindSiliguri.variable}>
+      <head>
+        {/* Inline script to set theme before paint — prevents flash */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var stored = localStorage.getItem('hi-git:theme');
+                  var parsed = stored ? JSON.parse(stored) : null;
+                  var theme = parsed?.state?.theme || 'system';
+                  var resolved;
+                  if (theme === 'system') {
+                    resolved = window.matchMedia('(prefers-color-scheme: dark)').matches
+                      ? 'dark' : 'light';
+                  } else {
+                    resolved = theme;
+                  }
+                  document.documentElement.setAttribute('data-theme', resolved);
+                } catch(e) {
+                  document.documentElement.setAttribute('data-theme', 'dark');
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
       <body>
+        <ThemeSync />
         <HtmlLangSync />
         {children}
       </body>

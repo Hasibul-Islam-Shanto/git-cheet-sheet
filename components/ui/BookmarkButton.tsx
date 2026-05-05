@@ -37,8 +37,8 @@ export default function BookmarkButton({
       title={bookmarked ? t.ui.bookmarkRemove : t.ui.bookmarkAdd}
       className={`p-1 rounded transition-all duration-200 ${
         bookmarked
-          ? 'text-[#f7c948]'
-          : 'text-[#7a8099] hover:text-[#f7c948] hover:bg-[rgba(247,201,72,0.1)]'
+          ? 'text-(--accent)'
+          : 'text-(--muted) hover:text-(--accent) hover:bg-[rgba(247,201,72,0.1)]'
       }`}
     >
       {bookmarked ? (
