@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react'
 import type { CommandDescription } from '@/types'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface Props {
   label: string
@@ -10,6 +11,13 @@ interface Props {
 }
 
 export function CommandDescriptionModal({ label, description, onClose }: Props) {
+  const { locale, t } = useTranslation()
+
+  const what    = locale === 'bn' ? description.whatBn    : description.what
+  const when    = locale === 'bn' ? description.whenBn    : description.when
+  const warning = locale === 'bn' ? description.warningBn : description.warning
+  const tip     = locale === 'bn' ? description.tipBn     : description.tip
+
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose()
@@ -31,7 +39,7 @@ export function CommandDescriptionModal({ label, description, onClose }: Props) 
         <div className="flex items-start justify-between mb-5">
           <div>
             <p className="text-[10px] font-mono text-[#7a8099] uppercase tracking-widest mb-1">
-              Command
+              {t.modal.command}
             </p>
             <h2 className="text-[0.95rem] font-bold text-[#e8eaf0]">{label}</h2>
           </div>
@@ -40,25 +48,25 @@ export function CommandDescriptionModal({ label, description, onClose }: Props) 
             className="text-(--muted) hover:text-(--text) text-lg leading-none transition-colors mt-0.5"
             aria-label="Close"
           >
-            ✕
+            {t.ui.close}
           </button>
         </div>
 
         <div className="mb-4">
           <p className="text-[10px] font-mono text-[#f7c948] uppercase tracking-widest mb-2">
-            What it does
+            {t.modal.whatItDoes}
           </p>
-          <p className="text-[0.83rem] text-[#e8eaf0] leading-relaxed">{description.what}</p>
+          <p className="text-[0.83rem] text-[#e8eaf0] leading-relaxed">{what}</p>
         </div>
 
         <div className="mb-4">
           <p className="text-[10px] font-mono text-[#4fffb0] uppercase tracking-widest mb-2">
-            When to use
+            {t.modal.whenToUse}
           </p>
-          <p className="text-[0.83rem] text-[#7a8099] leading-relaxed">{description.when}</p>
+          <p className="text-[0.83rem] text-[#7a8099] leading-relaxed">{when}</p>
         </div>
 
-        {description.warning && (
+        {warning && (
           <div
             className="mb-4 p-3 rounded-lg"
             style={{
@@ -67,15 +75,15 @@ export function CommandDescriptionModal({ label, description, onClose }: Props) 
             }}
           >
             <p className="text-[10px] font-mono text-[#ff6b6b] uppercase tracking-widest mb-1">
-              ⚠️ Watch out
+              {t.modal.watchOut}
             </p>
             <p className="text-[0.8rem] text-[#ff6b6b] leading-relaxed opacity-90">
-              {description.warning}
+              {warning}
             </p>
           </div>
         )}
 
-        {description.tip && (
+        {tip && (
           <div
             className="p-3 rounded-lg"
             style={{
@@ -84,9 +92,9 @@ export function CommandDescriptionModal({ label, description, onClose }: Props) 
             }}
           >
             <p className="text-[10px] font-mono text-[#4fffb0] uppercase tracking-widest mb-1">
-              💡 Pro tip
+              {t.modal.proTip}
             </p>
-            <p className="text-[0.8rem] text-[#7a8099] leading-relaxed">{description.tip}</p>
+            <p className="text-[0.8rem] text-[#7a8099] leading-relaxed">{tip}</p>
           </div>
         )}
       </div>

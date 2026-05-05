@@ -1,3 +1,6 @@
+'use client'
+
+import { useTranslation } from '@/hooks/useTranslation'
 import type { QuickRefRow } from '@/types'
 
 interface Props {
@@ -5,12 +8,14 @@ interface Props {
 }
 
 export default function QuickRefTable({ rows }: Props) {
+  const { t } = useTranslation()
+
   return (
     <div className="card bg-(--card) border border-(--border) rounded-xl overflow-hidden min-w-0 w-full">
       <table className="w-full border-collapse">
         <thead>
           <tr>
-            {['Command', 'What it does'].map((heading) => (
+            {[t.quickRef.colCommand, t.quickRef.colDesc].map((heading) => (
               <th
                 key={heading}
                 className="font-mono text-[0.65rem] tracking-[0.12em] uppercase text-(--muted) text-left px-3 py-2 border-b border-(--border)"

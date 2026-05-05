@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
+import { Hind_Siliguri } from "next/font/google";
 import "./globals.css";
+import { HtmlLangSync } from "@/components/ui/HtmlLangSync";
+
+const hindSiliguri = Hind_Siliguri({
+  subsets: ['bengali'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-bangla',
+})
 
 const siteUrl = "https://git-sheet.hi-shanto.me";
 
@@ -87,8 +95,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={hindSiliguri.variable}>
+      <body>
+        <HtmlLangSync />
+        {children}
+      </body>
     </html>
   );
 }

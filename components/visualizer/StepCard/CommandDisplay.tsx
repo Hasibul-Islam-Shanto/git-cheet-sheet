@@ -1,5 +1,6 @@
 'use client'
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard'
+import { useTranslation } from '@/hooks/useTranslation'
 
 interface Props {
   command: string
@@ -8,11 +9,12 @@ interface Props {
 
 export function CommandDisplay({ command, description }: Props) {
   const { copy, copied } = useCopyToClipboard()
+  const { t } = useTranslation()
 
   return (
     <div>
       <p className="text-xs font-mono font-semibold text-[#4fffb0] tracking-widest uppercase mb-2.5">
-        💻 The command
+        {t.visualizer.theCommand}
       </p>
       <div
         className="relative group rounded-xl overflow-hidden"
@@ -30,7 +32,7 @@ export function CommandDisplay({ command, description }: Props) {
             border: `1px solid ${copied ? 'rgba(79,255,176,0.3)' : '#232840'}`,
           }}
         >
-          {copied ? '✓ Copied' : 'Copy'}
+          {copied ? t.ui.copied : t.ui.copy}
         </button>
       </div>
       {description && (

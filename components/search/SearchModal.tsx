@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef } from 'react'
 import { useSearch } from '@/hooks/useSearch'
+import { useTranslation } from '@/hooks/useTranslation'
 import SearchResult from './SearchResult'
 
 interface SearchModalProps {
@@ -19,6 +20,7 @@ function scrollToCard(cardId: string) {
 
 export default function SearchModal({ onClose }: SearchModalProps) {
   const { query, results, activeIndex, handleQueryChange, setActiveIndex } = useSearch()
+  const { t } = useTranslation()
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleSelect = useCallback((cardId: string) => {
@@ -78,7 +80,7 @@ export default function SearchModal({ onClose }: SearchModalProps) {
             type="text"
             value={query}
             onChange={(e) => handleQueryChange(e.target.value)}
-            placeholder="Search commands..."
+            placeholder={t.search.placeholder}
             className="flex-1 bg-transparent text-[#e8eaf0] text-[0.9rem] font-mono outline-none placeholder:text-[#7a8099]"
           />
           {query && (
@@ -97,21 +99,21 @@ export default function SearchModal({ onClose }: SearchModalProps) {
         <div className="mt-2 bg-[#13161f] border border-[#232840] rounded-xl overflow-hidden max-h-[380px] overflow-y-auto">
           {query.length === 0 && (
             <div className="p-6 text-center text-[#7a8099] text-xs font-mono">
-              Type a command name, flag, or keyword...
+              {t.search.hint}
             </div>
           )}
 
           {query.length === 1 && (
             <div className="p-6 text-center text-[#7a8099] text-xs">
-              Keep typing...
+              {t.search.keepTyping}
             </div>
           )}
 
           {query.length >= 2 && results.length === 0 && (
             <div className="p-8 text-center">
-              <p className="text-sm text-[#e8eaf0] font-semibold">No commands found</p>
+              <p className="text-sm text-[#e8eaf0] font-semibold">{t.search.noResults}</p>
               <p className="text-xs text-[#7a8099] mt-1">
-                Try searching for &quot;reset&quot;, &quot;branch&quot;, &quot;stash&quot;...
+                {t.search.noResultsHint}
               </p>
             </div>
           )}

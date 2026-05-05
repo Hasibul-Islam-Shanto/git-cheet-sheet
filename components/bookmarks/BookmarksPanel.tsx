@@ -2,6 +2,7 @@
 
 import type { Bookmark } from '@/types'
 import { useBookmarkStore } from '@/store/useBookmarkStore'
+import { useTranslation } from '@/hooks/useTranslation'
 import BookmarkEmpty from './BookmarkEmpty'
 
 interface BookmarksPanelProps {
@@ -10,6 +11,7 @@ interface BookmarksPanelProps {
 
 export default function BookmarksPanel({ onClose }: BookmarksPanelProps) {
   const { bookmarks, removeBookmark, clearAll } = useBookmarkStore()
+  const { t } = useTranslation()
 
   const grouped = bookmarks.reduce<Record<string, Bookmark[]>>((acc, b) => {
     if (!acc[b.section]) acc[b.section] = []
@@ -24,7 +26,7 @@ export default function BookmarksPanel({ onClose }: BookmarksPanelProps) {
       <div className="fixed top-0 right-0 h-full w-[380px] max-w-full bg-[#13161f] border-l border-[#232840] z-50 flex flex-col animate-slide-in-right">
         <div className="flex items-center justify-between p-5 border-b border-[#232840]">
           <div>
-            <h2 className="font-bold text-sm text-[#e8eaf0]">Saved Commands</h2>
+            <h2 className="font-bold text-sm text-[#e8eaf0]">{t.bookmarks.header}</h2>
             <p className="text-xs text-[#7a8099] mt-0.5">
               {bookmarks.length} bookmark{bookmarks.length !== 1 ? 's' : ''}
             </p>
@@ -34,7 +36,7 @@ export default function BookmarksPanel({ onClose }: BookmarksPanelProps) {
             aria-label="Close bookmarks"
             className="text-[#7a8099] hover:text-[#e8eaf0] transition-colors text-lg leading-none p-1"
           >
-            ✕
+            {t.ui.close}
           </button>
         </div>
 
@@ -82,7 +84,7 @@ export default function BookmarksPanel({ onClose }: BookmarksPanelProps) {
               onClick={clearAll}
               className="text-xs text-[#7a8099] hover:text-[#ff6b6b] transition-colors"
             >
-              Clear all bookmarks
+              {t.bookmarks.clearAll}
             </button>
           </div>
         )}

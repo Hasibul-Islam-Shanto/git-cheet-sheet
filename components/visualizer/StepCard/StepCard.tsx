@@ -20,7 +20,7 @@ interface Props {
 }
 
 export function StepCard({ step, stepIndex, totalSteps, completedSteps, onNext, onPrev, isFirst, isLast }: Props) {
-  const { locale } = useTranslation()
+  const { locale, t } = useTranslation()
   const { onTouchStart, onTouchEnd } = useVisualizerNavigation()
 
   return (
@@ -44,7 +44,7 @@ export function StepCard({ step, stepIndex, totalSteps, completedSteps, onNext, 
 
       <div>
         <p className="text-xs font-mono font-semibold text-[#f7c948] tracking-widest uppercase mb-2.5">
-          📌 What&apos;s happening
+          {t.visualizer.whatsHappening}
         </p>
         <p className="text-[0.92rem] text-[#c8cad4] leading-relaxed">
           {locale === 'bn' ? (step.explanationBn ?? step.explanation) : step.explanation}
@@ -53,7 +53,7 @@ export function StepCard({ step, stepIndex, totalSteps, completedSteps, onNext, 
 
       <div>
         <p className="text-xs font-mono font-semibold text-[#4fffb0] tracking-widest uppercase mb-2.5">
-          💡 Why does this matter?
+          {t.visualizer.whyItMatters}
         </p>
         <p className="text-[0.92rem] text-[#9ba3bd] leading-relaxed">
           {locale === 'bn' ? (step.whyItMattersBn ?? step.whyItMatters) : step.whyItMatters}
@@ -89,21 +89,21 @@ export function StepCard({ step, stepIndex, totalSteps, completedSteps, onNext, 
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <path d="M9 2L4 7L9 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-            Previous
+            {t.visualizer.previous}
           </button>
           <button
             onClick={onNext}
             className="inline-flex items-center gap-2 px-7 py-2.5 rounded-xl text-[0.9rem] font-bold text-[#0d0f16] bg-[#f7c948] hover:bg-[#e6b93d] active:scale-95 transition-all duration-150"
           >
             {isLast ? (
-              <>Complete <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 4.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></>
+              <>{t.visualizer.complete} <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5L5.5 10.5L11.5 4.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg></>
             ) : (
-              <>Next Step <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2L10 7L5 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></>
+              <>{t.visualizer.nextStep} <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M5 2L10 7L5 12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg></>
             )}
           </button>
         </div>
         <p className="text-center text-xs text-[#2d3150] mt-3 font-mono">
-          ⌨️ &nbsp;arrow keys to navigate &nbsp;·&nbsp; swipe on mobile
+          {t.visualizer.keyboardHint}
         </p>
       </div>
     </motion.div>

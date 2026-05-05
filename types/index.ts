@@ -8,6 +8,10 @@ export interface CommandDescription {
   when: string
   warning?: string
   tip?: string
+  whatBn: string
+  whenBn: string
+  warningBn?: string
+  tipBn?: string
 }
 
 export interface CommandExample {
