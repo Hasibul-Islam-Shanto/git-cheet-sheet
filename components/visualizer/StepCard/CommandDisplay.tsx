@@ -13,14 +13,14 @@ export function CommandDisplay({ command, description }: Props) {
 
   return (
     <div>
-      <p className="text-xs font-mono font-semibold text-[#4fffb0] tracking-widest uppercase mb-2.5">
+      <p className="text-xs font-mono font-semibold text-(--accent2) tracking-widest uppercase mb-2.5">
         {t.visualizer.theCommand}
       </p>
       <div
         className="relative group rounded-xl overflow-hidden"
-        style={{ background: '#0a0c12', border: '1px solid #1e2233' }}
+        style={{ background: 'var(--code-bg)', border: '1px solid var(--border)' }}
       >
-        <pre className="px-5 py-4 font-mono text-[0.95rem] text-[#f7c948] leading-relaxed overflow-x-auto whitespace-pre-wrap break-all pr-16">
+        <pre className="px-5 py-4 font-mono text-[0.95rem] text-(--accent) leading-relaxed overflow-x-auto whitespace-pre-wrap break-all pr-16">
           {command}
         </pre>
         <button
@@ -28,15 +28,15 @@ export function CommandDisplay({ command, description }: Props) {
           className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 px-2.5 py-1 rounded-md text-xs font-mono font-semibold transition-all duration-150"
           style={{
             background: copied ? 'rgba(79,255,176,0.15)' : 'rgba(255,255,255,0.05)',
-            color: copied ? '#4fffb0' : '#7a8099',
-            border: `1px solid ${copied ? 'rgba(79,255,176,0.3)' : '#232840'}`,
+            color: copied ? 'var(--accent2)' : 'var(--muted)',
+            border: `1px solid ${copied ? 'rgba(79,255,176,0.3)' : 'var(--border)'}`,
           }}
         >
           {copied ? t.ui.copied : t.ui.copy}
         </button>
       </div>
       {description && (
-        <p className="text-[0.8rem] text-[#7a8099] mt-2.5 font-mono leading-relaxed">
+        <p className="text-[0.8rem] text-(--muted) mt-2.5 font-mono leading-relaxed">
           {description}
         </p>
       )}

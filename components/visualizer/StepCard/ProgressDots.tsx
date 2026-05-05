@@ -23,7 +23,7 @@ export function ProgressDots({ total, current, completed }: Props) {
             style={{
               width: isCurrent ? 32 : 10,
               height: 10,
-              background: isDone ? '#4fffb0' : isCurrent ? '#f7c948' : '#232840',
+              background: isDone ? 'var(--accent2)' : isCurrent ? 'var(--accent)' : 'var(--border)',
               transition: 'width 0.3s ease, background 0.3s ease',
             }}
           >
@@ -33,7 +33,7 @@ export function ProgressDots({ total, current, completed }: Props) {
           </motion.div>
         )
       })}
-      <span className="text-xs text-[#7a8099] font-mono ml-1">
+      <span className="text-xs text-(--muted) font-mono ml-1">
         {t.visualizer.stepOf(current + 1, total)}
       </span>
     </div>

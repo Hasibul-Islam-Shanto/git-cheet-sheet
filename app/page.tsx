@@ -8,6 +8,7 @@ import QuickRefTable from "@/components/QuickRefTable";
 import Footer from "@/components/Footer";
 import BookmarksTrigger from "@/components/bookmarks/BookmarksTrigger";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -38,6 +39,7 @@ export default function Page() {
       />
 
       <div className="fixed top-5 right-5 z-30 flex items-center gap-2">
+        <ThemeToggle />
         <LanguageSwitcher />
         <BookmarksTrigger />
       </div>

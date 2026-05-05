@@ -15,7 +15,7 @@ export default function BookmarksTrigger() {
       <button
         onClick={() => setOpen(true)}
         aria-label="Open bookmarks"
-        className="flex items-center gap-2 bg-[#13161f] border border-[#232840] px-3 py-2 rounded-lg text-xs text-[#7a8099] hover:text-[#f7c948] hover:border-[rgba(247,201,72,0.3)] transition-all duration-200"
+        className="flex items-center gap-2 bg-(--card) border border-(--border) px-3 py-2 rounded-lg text-xs text-(--muted) hover:text-(--accent) hover:border-[rgba(247,201,72,0.3)] transition-all duration-200"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -32,7 +32,7 @@ export default function BookmarksTrigger() {
         </svg>
         {t.ui.saved}
         {bookmarks.length > 0 && (
-          <span className="bg-[#f7c948] text-[#0d0f16] text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+          <span className="bg-(--accent) text-(--bg) text-[10px] font-bold px-1.5 py-0.5 rounded-full">
             {bookmarks.length}
           </span>
         )}

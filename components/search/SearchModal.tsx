@@ -60,17 +60,17 @@ export default function SearchModal({ onClose }: SearchModalProps) {
         className="w-[90%] max-w-[560px]"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center gap-3 px-4 py-3 bg-[#13161f] border border-[#232840] rounded-xl focus-within:border-[rgba(247,201,72,0.5)] transition-colors">
+        <div className="flex items-center gap-3 px-4 py-3 bg-(--card) border border-(--border) rounded-xl focus-within:border-[rgba(247,201,72,0.5)] transition-colors">
           <svg
             width="16"
             height="16"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#7a8099"
+            stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="shrink-0"
+            className="shrink-0 text-(--muted)"
           >
             <circle cx="11" cy="11" r="8" />
             <path d="m21 21-4.35-4.35" />
@@ -81,45 +81,45 @@ export default function SearchModal({ onClose }: SearchModalProps) {
             value={query}
             onChange={(e) => handleQueryChange(e.target.value)}
             placeholder={t.search.placeholder}
-            className="flex-1 bg-transparent text-[#e8eaf0] text-[0.9rem] font-mono outline-none placeholder:text-[#7a8099]"
+            className="flex-1 bg-transparent text-(--text) text-[0.9rem] font-mono outline-none placeholder:text-(--muted)"
           />
           {query && (
             <button
               onClick={() => handleQueryChange('')}
-              className="text-[#7a8099] hover:text-[#e8eaf0] transition-colors text-sm"
+              className="text-(--muted) hover:text-(--text) transition-colors text-sm"
             >
               ✕
             </button>
           )}
-          <kbd className="hidden sm:inline-flex text-[10px] text-[#7a8099] font-mono bg-[#0d0f16] border border-[#232840] px-1.5 py-0.5 rounded shrink-0">
+          <kbd className="hidden sm:inline-flex text-[10px] text-(--muted) font-mono bg-(--bg) border border-(--border) px-1.5 py-0.5 rounded shrink-0">
             Esc
           </kbd>
         </div>
 
-        <div className="mt-2 bg-[#13161f] border border-[#232840] rounded-xl overflow-hidden max-h-[380px] overflow-y-auto">
+        <div className="mt-2 bg-(--card) border border-(--border) rounded-xl overflow-hidden max-h-[380px] overflow-y-auto">
           {query.length === 0 && (
-            <div className="p-6 text-center text-[#7a8099] text-xs font-mono">
+            <div className="p-6 text-center text-(--muted) text-xs font-mono">
               {t.search.hint}
             </div>
           )}
 
           {query.length === 1 && (
-            <div className="p-6 text-center text-[#7a8099] text-xs">
+            <div className="p-6 text-center text-(--muted) text-xs">
               {t.search.keepTyping}
             </div>
           )}
 
           {query.length >= 2 && results.length === 0 && (
             <div className="p-8 text-center">
-              <p className="text-sm text-[#e8eaf0] font-semibold">{t.search.noResults}</p>
-              <p className="text-xs text-[#7a8099] mt-1">
+              <p className="text-sm text-(--text) font-semibold">{t.search.noResults}</p>
+              <p className="text-xs text-(--muted) mt-1">
                 {t.search.noResultsHint}
               </p>
             </div>
           )}
 
           {results.length > 0 && (
-            <div className="divide-y divide-[#1e2233]">
+            <div className="divide-y divide-(--border)">
               {results.map((item, idx) => (
                 <SearchResult
                   key={`${item.cardId}-${item.commandLabel}`}
