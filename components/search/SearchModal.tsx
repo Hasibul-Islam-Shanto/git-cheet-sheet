@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef } from 'react'
 import { useSearch } from '@/hooks/useSearch'
+import { useFocusTrap } from '@/hooks/useFocusTrap'
 import { useTranslation } from '@/hooks/useTranslation'
 import SearchResult from './SearchResult'
 
@@ -22,6 +23,8 @@ export default function SearchModal({ onClose }: SearchModalProps) {
   const { query, results, activeIndex, handleQueryChange, setActiveIndex } = useSearch()
   const { t } = useTranslation()
   const inputRef = useRef<HTMLInputElement>(null)
+  const trapRef = useRef<HTMLDivElement>(null)
+  useFocusTrap(trapRef, true)
 
   const handleSelect = useCallback((cardId: string) => {
     onClose()
@@ -29,11 +32,8 @@ export default function SearchModal({ onClose }: SearchModalProps) {
   }, [onClose])
 
   useEffect(() => {
-    inputRef.current?.focus()
-  }, [])
-
-  useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (results.length === 0) return
       if (e.key === 'ArrowDown') {
         e.preventDefault()
         setActiveIndex(Math.min(activeIndex + 1, results.length - 1))
@@ -53,15 +53,23 @@ export default function SearchModal({ onClose }: SearchModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-start justify-center pt-[15vh] animate-fade-in"
+      ref={trapRef}
+      className="fixed inset-0 z-50 bg-black/60 flex items-start justify-center pt-[15vh] animate-fade-in"
       onClick={onClose}
     >
       <div
         className="w-[90%] max-w-[560px]"
         onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="search-dialog-title"
       >
+        <h2 id="search-dialog-title" className="sr-only">
+          {t.search.dialogTitle}
+        </h2>
         <div className="flex items-center gap-3 px-4 py-3 bg-(--card) border border-(--border) rounded-xl focus-within:border-[rgba(247,201,72,0.5)] transition-colors">
           <svg
+            aria-hidden="true"
             width="16"
             height="16"
             viewBox="0 0 24 24"
@@ -81,12 +89,15 @@ export default function SearchModal({ onClose }: SearchModalProps) {
             value={query}
             onChange={(e) => handleQueryChange(e.target.value)}
             placeholder={t.search.placeholder}
+            data-autofocus
             className="flex-1 bg-transparent text-(--text) text-[0.9rem] font-mono outline-none placeholder:text-(--muted)"
           />
           {query && (
             <button
+              type="button"
               onClick={() => handleQueryChange('')}
-              className="text-(--muted) hover:text-(--text) transition-colors text-sm"
+              aria-label={t.search.clearQuery}
+              className="text-(--muted) hover:text-(--text) transition-colors text-sm min-h-9 min-w-9 inline-flex items-center justify-center rounded-md"
             >
               ✕
             </button>
@@ -119,14 +130,14 @@ export default function SearchModal({ onClose }: SearchModalProps) {
           )}
 
           {results.length > 0 && (
-            <div className="divide-y divide-(--border)">
+            <div className="divide-y divide-(--border) flex flex-col">
               {results.map((item, idx) => (
                 <SearchResult
                   key={`${item.cardId}-${item.commandLabel}`}
                   item={item}
                   isActive={idx === activeIndex}
                   query={query}
-                  onClick={() => handleSelect(item.cardId)}
+                  onPick={() => handleSelect(item.cardId)}
                   onMouseEnter={() => setActiveIndex(idx)}
                 />
               ))}

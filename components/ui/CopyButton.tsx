@@ -13,9 +13,10 @@ export default function CopyButton({ text }: CopyButtonProps) {
 
   return (
     <button
+      type="button"
       onClick={() => copy(text)}
       aria-label={copied ? t.ui.copied : t.ui.copy}
-      className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-150 p-1.5 rounded-md bg-[rgba(0,0,0,0.4)] hover:bg-[rgba(255,255,255,0.08)]"
+      className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus-visible:opacity-100 transition-opacity duration-150 p-1.5 rounded-md bg-[rgba(0,0,0,0.4)] hover:bg-[rgba(255,255,255,0.08)]"
     >
       {copied ? (
         <svg

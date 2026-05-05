@@ -6,7 +6,7 @@ import { ThemeSync } from "@/components/ui/ThemeSync";
 
 const hindSiliguri = Hind_Siliguri({
   subsets: ['bengali'],
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '600', '700'],
   variable: '--font-bangla',
 })
 

@@ -1,8 +1,9 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import type { CommandDescription } from '@/types'
 import { useTranslation } from '@/hooks/useTranslation'
+import { useFocusTrap } from '@/hooks/useFocusTrap'
 
 interface Props {
   label: string
@@ -12,11 +13,13 @@ interface Props {
 
 export function CommandDescriptionModal({ label, description, onClose }: Props) {
   const { locale, t } = useTranslation()
+  const trapRef = useRef<HTMLDivElement>(null)
+  useFocusTrap(trapRef, true)
 
-  const what    = locale === 'bn' ? description.whatBn    : description.what
-  const when    = locale === 'bn' ? description.whenBn    : description.when
+  const what = locale === 'bn' ? description.whatBn : description.what
+  const when = locale === 'bn' ? description.whenBn : description.when
   const warning = locale === 'bn' ? description.warningBn : description.warning
-  const tip     = locale === 'bn' ? description.tipBn     : description.tip
+  const tip = locale === 'bn' ? description.tipBn : description.tip
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -28,10 +31,14 @@ export function CommandDescriptionModal({ label, description, onClose }: Props) 
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in"
+      ref={trapRef}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 animate-fade-in"
       onClick={onClose}
     >
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cmd-desc-heading"
         className="w-[90%] max-w-[480px] rounded-2xl border p-7"
         style={{ background: 'var(--card)', borderColor: 'var(--border)' }}
         onClick={(e) => e.stopPropagation()}
@@ -41,12 +48,20 @@ export function CommandDescriptionModal({ label, description, onClose }: Props) 
             <p className="text-[10px] font-mono text-(--muted) uppercase tracking-widest mb-1">
               {t.modal.command}
             </p>
-            <h2 className="text-[0.95rem] font-bold text-(--text)">{label}</h2>
+            <h2
+              id="cmd-desc-heading"
+              tabIndex={0}
+              data-autofocus
+              className="text-[0.95rem] font-bold text-(--text) outline-none focus-visible:ring-2 focus-visible:ring-(--accent)/40 rounded-sm"
+            >
+              {label}
+            </h2>
           </div>
           <button
+            type="button"
             onClick={onClose}
-            className="text-(--muted) hover:text-(--text) text-lg leading-none transition-colors mt-0.5"
-            aria-label="Close"
+            aria-label={t.modal.closeAria}
+            className="text-(--muted) hover:text-(--text) text-lg leading-none transition-colors mt-0.5 min-h-11 min-w-11 shrink-0 inline-flex items-center justify-center rounded-lg"
           >
             {t.ui.close}
           </button>

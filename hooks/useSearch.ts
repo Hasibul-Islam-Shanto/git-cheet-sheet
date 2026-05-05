@@ -2,7 +2,9 @@
 
 import { useEffect } from 'react'
 import { useSearchStore } from '@/store/useSearchStore'
-import { searchIndex } from '@/lib/searchIndex'
+import { loadSearchIndex } from '@/lib/loadSearchIndex'
+
+let querySeq = 0
 
 export function useSearch() {
   const query = useSearchStore((s) => s.query)
@@ -13,6 +15,10 @@ export function useSearch() {
   const closeSearch = useSearchStore((s) => s.closeSearch)
   const setActiveIndex = useSearchStore((s) => s.setActiveIndex)
   const setQuery = useSearchStore((s) => s.setQuery)
+
+  useEffect(() => {
+    if (isOpen) void loadSearchIndex()
+  }, [isOpen])
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -34,7 +40,11 @@ export function useSearch() {
   }, [isOpen, openSearch, closeSearch])
 
   const handleQueryChange = (q: string) => {
-    setQuery(q, searchIndex)
+    const id = ++querySeq
+    void loadSearchIndex().then((index) => {
+      if (id !== querySeq) return
+      setQuery(q, index)
+    })
   }
 
   return {
